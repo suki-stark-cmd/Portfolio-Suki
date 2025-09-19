@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Database Initializer</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1e1b4b, #3730a3);
+            color: white;
+            margin: 0;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #60a5fa;
+            margin-bottom: 1rem;
+        }
+
+        .status {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            text-align: left;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success {
+            color: #22c55e;
+        }
+
+        .error {
+            color: #ef4444;
+        }
+
+        .info {
+            color: #60a5fa;
+        }
+
+        .warning {
+            color: #f59e0b;
+        }
+
+        .steps {
+            text-align: left;
+            margin: 2rem 0;
+        }
+
+        .steps h3 {
+            color: #60a5fa;
+            margin-bottom: 1rem;
+        }
+
+        .steps ol {
+            padding-left: 1.5rem;
+        }
+
+        .steps li {
+            margin: 0.5rem 0;
+            line-height: 1.5;
+        }
+
+        .config-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: left;
+        }
+
+        .config-section h4 {
+            color: #f59e0b;
+            margin-top: 0;
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔥 Firebase Database Initializer</h1>
+        
+        <div class="config-section">
+            <h4>⚙️ Configuration Required</h4>
+            <p>Before initializing the database, you need to:</p>
+            <ol>
+                <li>Create a Firebase project at <a href="https://console.firebase.google.com" target="_blank" style="color: #60a5fa;">console.firebase.google.com</a></li>
+                <li>Enable Firestore Database (in production mode)</li>
+                <li>Enable Authentication with Email/Password</li>
+                <li>Copy your Firebase config from Project Settings → General → Web apps</li>
+                <li>Update the config in <code>firebase-config.js</code></li>
+                <li>Create an admin user in Authentication section</li>
+            </ol>
+        </div>
+
+        <div class="steps">
+            <h3>📋 Initialization Steps</h3>
+            <ol>
+                <li><strong>Personal Information:</strong> Basic profile data</li>
+                <li><strong>About Information:</strong> Bio, stats, and skill categories</li>
+                <li><strong>Projects:</strong> Portfolio projects with details</li>
+                <li><strong>Skills:</strong> Technical skills with proficiency levels</li>
+                <li><strong>Experience:</strong> Work history and positions</li>
+            </ol>
+        </div>
+
+        <button id="initBtn" class="btn" onclick="initializeDatabase()">
+            🚀 Initialize Database
+        </button>
+
+        <div id="status" class="status" style="display: none;">
+            <div id="statusContent"></div>
+        </div>
+
+        <div style="margin-top: 2rem;">
+            <button class="btn" onclick="window.location.href='index.html'">
+                ← Back to Portfolio
+            </button>
+            <button class="btn" onclick="window.location.href='admin/login.html'">
+                Admin Dashboard →
+            </button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { firebaseService } from './firebase-config.js';
+
+        let statusDiv, statusContent, initBtn;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            statusDiv = document.getElementById('status');
+            statusContent = document.getElementById('statusContent');
+            initBtn = document.getElementById('initBtn');
+
+            // Check Firebase connection
+            checkFirebaseConnection();
+        });
+
+        async function checkFirebaseConnection() {
+            try {
+                // Try to access Firestore
+                const testResult = await firebaseService.getCollection('test');
+                if (testResult.success !== undefined) {
+                    logStatus('✅ Firebase connection successful', 'success');
+                } else {
+                    logStatus('⚠️ Firebase may not be properly configured', 'warning');
+                }
+            } catch (error) {
+                logStatus('❌ Firebase connection failed: ' + error.message, 'error');
+                logStatus('Please check your Firebase configuration in firebase-config.js', 'warning');
+            }
+        }
+
+        window.initializeDatabase = async function() {
+            initBtn.disabled = true;
+            initBtn.textContent = '🔄 Initializing...';
+            statusDiv.style.display = 'block';
+            statusContent.innerHTML = '';
+
+            try {
+                logStatus('🔥 Starting Firebase database initialization...', 'info');
+
+                // Initialize Personal Information
+                logStatus('📝 Initializing personal information...', 'info');
+                await initializePersonalInfo();
+
+                // Initialize About Information
+                logStatus('👤 Initializing about information...', 'info');
+                await initializeAboutInfo();
+
+                // Initialize Projects
+                logStatus('💼 Initializing projects...', 'info');
+                await initializeProjects();
+
+                // Initialize Skills
+                logStatus('🛠️ Initializing skills...', 'info');
+                await initializeSkills();
+
+                // Initialize Experience
+                logStatus('💻 Initializing experience...', 'info');
+                await initializeExperience();
+
+                logStatus('✅ Database initialization completed successfully!', 'success');
+                logStatus('🎉 Your portfolio is now ready with Firebase backend!', 'success');
+
+            } catch (error) {
+                logStatus('❌ Error during initialization: ' + error.message, 'error');
+                console.error('Initialization error:', error);
+            } finally {
+                initBtn.disabled = false;
+                initBtn.textContent = '🚀 Initialize Database';
+            }
+        };
+
+        function logStatus(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.className = type;
+            logEntry.textContent = `[${timestamp}] ${message}`;
+            statusContent.appendChild(logEntry);
+            statusContent.scrollTop = statusContent.scrollHeight;
+        }
+
+        async function initializePersonalInfo() {
+            const personalInfo = {
+                name: "Suki S",
+                title: "AI Developer & Machine Learning Engineer",
+                bio: "Passionate AI developer with expertise in machine learning, deep learning, and full-stack development. I create intelligent solutions that bridge the gap between cutting-edge AI research and practical applications.",
+                email: "suki.stark@example.com",
+                phone: "+1 (555) 123-4567",
+                location: "San Francisco, CA",
+                github: "https://github.com/suki-stark-cmd",
+                linkedin: "https://linkedin.com/in/suki-s",
+                twitter: "https://twitter.com/suki_stark"
+            };
+
+            const result = await firebaseService.addDocument('personalInfo', personalInfo, 'main');
+            if (result.success) {
+                logStatus('✅ Personal information initialized', 'success');
+            } else {
+                throw new Error('Failed to initialize personal information: ' + result.error);
+            }
+        }
+
+        async function initializeAboutInfo() {
+            const aboutInfo = {
+                description: "I'm a passionate AI developer with a strong background in machine learning, deep learning, and full-stack development. My journey in tech started with a fascination for how machines can learn and adapt, leading me to specialize in creating intelligent solutions that solve real-world problems.",
+                stats: {
+                    projects: "50+",
+                    experience: "5+",
+                    technologies: "25+",
+                    satisfaction: "99%"
+                },
+                skillCategories: {
+                    ai_ml: {
+                        title: "AI & Machine Learning",
+                        tags: ["TensorFlow", "PyTorch", "Scikit-learn", "OpenCV", "NLTK"]
+                    },
+                    programming: {
+                        title: "Programming Languages",
+                        tags: ["Python", "JavaScript", "TypeScript", "Java", "C++"]
+                    },
+                    web: {
+                        title: "Web Development",
+                        tags: ["React", "Node.js", "Express", "MongoDB", "PostgreSQL"]
+                    },
+                    cloud: {
+                        title: "Cloud & DevOps",
+                        tags: ["AWS", "Google Cloud", "Docker", "Kubernetes", "CI/CD"]
+                    }
+                },
+                resume: {
+                    link: "https://drive.google.com/file/d/your-resume-id/view",
+                    text: "Download Resume"
+                }
+            };
+
+            const result = await firebaseService.addDocument('aboutInfo', aboutInfo, 'main');
+            if (result.success) {
+                logStatus('✅ About information initialized', 'success');
+            } else {
+                throw new Error('Failed to initialize about information: ' + result.error);
+            }
+        }
+
+        async function initializeProjects() {
+            const projects = [
+                {
+                    title: "AI-Powered Chatbot",
+                    description: "Developed an intelligent chatbot using natural language processing and machine learning algorithms for customer service automation.",
+                    category: "ai",
+                    technologies: "Python, TensorFlow, NLTK, Flask, React",
+                    image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=600&h=400&fit=crop",
+                    demo_url: "https://ai-chatbot-demo.herokuapp.com",
+                    github_url: "https://github.com/suki-stark-cmd/ai-chatbot",
+                    createdAt: new Date().toISOString()
+                },
+                {
+                    title: "Computer Vision App",
+                    description: "Built a real-time object detection and classification system using deep learning and computer vision techniques.",
+                    category: "ai",
+                    technologies: "Python, OpenCV, PyTorch, FastAPI, Vue.js",
+                    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop",
+                    demo_url: "https://cv-detection-app.netlify.app",
+                    github_url: "https://github.com/suki-stark-cmd/computer-vision-app",
+                    createdAt: new Date(Date.now() - 86400000).toISOString()
+                },
+                {
+                    title: "E-Commerce Platform",
+                    description: "Full-stack e-commerce solution with modern UI, payment integration, and advanced features like recommendation systems.",
+                    category: "web",
+                    technologies: "React, Node.js, MongoDB, Stripe, Redux",
+                    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
+                    demo_url: "https://modern-ecommerce-demo.vercel.app",
+                    github_url: "https://github.com/suki-stark-cmd/ecommerce-platform",
+                    createdAt: new Date(Date.now() - 172800000).toISOString()
+                }
+            ];
+
+            for (const project of projects) {
+                const result = await firebaseService.addDocument('projects', project);
+                if (result.success) {
+                    logStatus(`✅ Project "${project.title}" added`, 'success');
+                } else {
+                    throw new Error(`Failed to add project "${project.title}": ${result.error}`);
+                }
+            }
+        }
+
+        async function initializeSkills() {
+            const skills = [
+                {
+                    name: "Machine Learning",
+                    category: "ai",
+                    description: "Expert in supervised and unsupervised learning algorithms, model optimization, and deployment.",
+                    proficiency: 95,
+                    icon: "fas fa-brain"
+                },
+                {
+                    name: "Python",
+                    category: "programming",
+                    description: "Advanced Python development with focus on data science, AI, and backend development.",
+                    proficiency: 95,
+                    icon: "fab fa-python"
+                },
+                {
+                    name: "JavaScript",
+                    category: "programming",
+                    description: "Full-stack JavaScript development including ES6+, Node.js, and modern frameworks.",
+                    proficiency: 90,
+                    icon: "fab fa-js-square"
+                },
+                {
+                    name: "React",
+                    category: "frontend",
+                    description: "Expert in building responsive and interactive user interfaces with React ecosystem.",
+                    proficiency: 88,
+                    icon: "fab fa-react"
+                }
+            ];
+
+            for (const skill of skills) {
+                const result = await firebaseService.addDocument('skills', skill);
+                if (result.success) {
+                    logStatus(`✅ Skill "${skill.name}" added`, 'success');
+                } else {
+                    throw new Error(`Failed to add skill "${skill.name}": ${result.error}`);
+                }
+            }
+        }
+
+        async function initializeExperience() {
+            const experiences = [
+                {
+                    position: "Senior AI Developer",
+                    company: "TechFlow AI",
+                    start_date: "2022-01",
+                    end_date: null,
+                    description: "Leading AI initiatives and machine learning projects. Developed computer vision systems for automated quality control and NLP solutions for customer support automation.",
+                    technologies: "Python, TensorFlow, PyTorch, AWS, Docker, Kubernetes",
+                    location: "San Francisco, CA"
+                },
+                {
+                    position: "Machine Learning Engineer",
+                    company: "DataScope Inc.",
+                    start_date: "2020-03",
+                    end_date: "2021-12",
+                    description: "Built and deployed ML models for predictive analytics and recommendation systems. Improved model performance by 40% and reduced inference time by 60%.",
+                    technologies: "Python, Scikit-learn, Apache Spark, MongoDB, Flask",
+                    location: "Remote"
+                }
+            ];
+
+            for (const experience of experiences) {
+                const result = await firebaseService.addDocument('experience', experience);
+                if (result.success) {
+                    logStatus(`✅ Experience "${experience.position}" added`, 'success');
+                } else {
+                    throw new Error(`Failed to add experience "${experience.position}": ${result.error}`);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
