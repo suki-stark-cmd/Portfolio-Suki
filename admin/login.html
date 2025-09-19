@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Suki S Portfolio</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="admin-styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="admin-body">
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="login-logo">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h1>Admin Portal</h1>
+                <p>Portfolio Management Dashboard</p>
+            </div>
+            
+            <form id="admin-login-form" class="login-form">
+                <div class="form-group">
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" name="username" placeholder="Username" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" placeholder="Password" required>
+                        <button type="button" class="toggle-password" id="toggle-password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="remember-me">
+                        <span class="checkmark"></span>
+                        Remember me
+                    </label>
+                </div>
+                
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Sign In
+                </button>
+                
+                <div class="login-footer">
+                    <a href="../index.html" class="back-link">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Portfolio
+                    </a>
+                </div>
+            </form>
+            
+            <div class="login-info">
+                <div class="security-features">
+                    <div class="feature">
+                        <i class="fas fa-lock"></i>
+                        <span>Secure Authentication</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Protected Dashboard</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-edit"></i>
+                        <span>Content Management</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Login Notification -->
+    <div id="login-notification" class="notification hidden">
+        <div class="notification-content">
+            <i class="fas fa-exclamation-circle"></i>
+            <span id="notification-message"></span>
+        </div>
+    </div>
+    
+    <script src="admin-login.js"></script>
+</body>
+</html>

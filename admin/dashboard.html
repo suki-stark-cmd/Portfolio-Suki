@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Suki S Portfolio</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="admin-styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="admin-body">
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="admin-nav">
+            <div class="admin-logo">
+                <i class="fas fa-cog"></i>
+                <span>Portfolio Admin</span>
+            </div>
+            <div class="admin-user">
+                <div class="user-info">
+                    <span class="user-name">Suki S</span>
+                    <span class="user-role">Administrator</span>
+                </div>
+                <div class="user-menu">
+                    <button class="user-menu-btn" onclick="toggleUserMenu()">
+                        <i class="fas fa-user-circle"></i>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="user-dropdown" id="user-dropdown">
+                        <a href="../index.html" target="_blank">
+                            <i class="fas fa-external-link-alt"></i>
+                            View Portfolio
+                        </a>
+                        <a href="#" onclick="exportData()">
+                            <i class="fas fa-download"></i>
+                            Export Data
+                        </a>
+                        <a href="#" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Admin Sidebar -->
+    <aside class="admin-sidebar">
+        <nav class="admin-nav-menu">
+            <ul>
+                <li class="nav-item active" data-section="dashboard">
+                    <a href="#dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-section="profile">
+                    <a href="#profile">
+                        <i class="fas fa-user"></i>
+                        <span>Profile Info</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-section="about">
+                    <a href="#about">
+                        <i class="fas fa-info-circle"></i>
+                        <span>About Me</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-section="skills">
+                    <a href="#skills">
+                        <i class="fas fa-brain"></i>
+                        <span>Technical Skills</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-section="projects">
+                    <a href="#projects">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Projects</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-section="experience">
+                    <a href="#experience">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Experience</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-section="contact">
+                    <a href="#contact">
+                        <i class="fas fa-envelope"></i>
+                        <span>Contact Info</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-section="messages">
+                    <a href="#messages">
+                        <i class="fas fa-comments"></i>
+                        <span>Messages</span>
+                        <span class="badge">3</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-section="settings">
+                    <a href="#settings">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <!-- Dashboard Section -->
+        <section id="dashboard-section" class="admin-section active">
+            <div class="section-header">
+                <h1>Dashboard Overview</h1>
+                <p>Manage your portfolio content and monitor performance</p>
+            </div>
+            
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="total-projects">6</h3>
+                        <p>Total Projects</p>
+                    </div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+2 this month</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="total-skills">6</h3>
+                        <p>Technical Skills</p>
+                    </div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+1 this month</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="total-experience">4</h3>
+                        <p>Experience Items</p>
+                    </div>
+                    <div class="stat-change neutral">
+                        <i class="fas fa-minus"></i>
+                        <span>No change</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="total-messages">12</h3>
+                        <p>Messages</p>
+                    </div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+3 new</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-charts">
+                <div class="chart-card">
+                    <h3>Portfolio Views</h3>
+                    <div class="chart-placeholder">
+                        <i class="fas fa-chart-line"></i>
+                        <p>Chart visualization would go here</p>
+                    </div>
+                </div>
+                
+                <div class="chart-card">
+                    <h3>Recent Activity</h3>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>Added new project: AI Chatbot</span>
+                            <small>2 days ago</small>
+                        </div>
+                        <div class="activity-item">
+                            <i class="fas fa-edit"></i>
+                            <span>Updated skill: Machine Learning</span>
+                            <small>1 week ago</small>
+                        </div>
+                        <div class="activity-item">
+                            <i class="fas fa-trash"></i>
+                            <span>Removed outdated project</span>
+                            <small>2 weeks ago</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Section -->
+        <section id="profile-section" class="admin-section">
+            <div class="section-header">
+                <h1>Profile Information</h1>
+                <p>Update your personal information and bio</p>
+            </div>
+            
+            <div class="admin-card">
+                <form id="profile-form" class="admin-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="full-name">Full Name</label>
+                            <input type="text" id="full-name" name="fullName" value="Suki S" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="job-title">Job Title</label>
+                            <input type="text" id="job-title" name="jobTitle" value="AI Developer & Machine Learning Engineer" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bio">Bio Description</label>
+                        <textarea id="bio" name="bio" rows="4" required>Passionate about creating intelligent solutions that make a difference. Specialized in Machine Learning, Deep Learning, and AI-powered applications.</textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" value="suki.ai.developer@gmail.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" value="+91 9080630925" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" name="location" value="Coimbatore, India" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-image">Profile Image</label>
+                            <input type="file" id="profile-image" name="profileImage" accept="image/*">
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="resetForm('profile-form')">Reset</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about-section" class="admin-section">
+            <div class="section-header">
+                <h1>About Me Customization</h1>
+                <p>Control the About section content, stats, and skill categories</p>
+            </div>
+            
+            <div class="admin-card">
+                <form id="about-form" class="admin-form">
+                    <div class="form-group">
+                        <label for="about-description">About Me Description</label>
+                        <textarea id="about-description" name="description" rows="6" placeholder="Write your professional summary and what drives you...">I'm a passionate AI Developer with expertise in machine learning, deep learning, and natural language processing. I love solving complex problems and building intelligent systems that can make a real impact.</textarea>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>About Stats</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="projects-count">Projects Completed</label>
+                                <input type="number" id="projects-count" name="projects_count" value="50" min="0">
+                                <small>Display format: "50+"</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="years-experience">Years Experience</label>
+                                <input type="number" id="years-experience" name="years_experience" value="3" min="0" step="0.5">
+                                <small>Display format: "3+"</small>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="technologies-count">Technologies</label>
+                                <input type="number" id="technologies-count" name="technologies_count" value="10" min="0">
+                                <small>Display format: "10+"</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="satisfaction-rate">Client Satisfaction</label>
+                                <input type="number" id="satisfaction-rate" name="satisfaction_rate" value="100" min="0" max="100">
+                                <small>Display format: "100%"</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>Skill Categories Preview</h3>
+                        <div class="skill-categories-container">
+                            <div class="skill-category-item">
+                                <div class="form-group">
+                                    <label for="aiml-title">AI/ML Category Title</label>
+                                    <input type="text" id="aiml-title" name="aiml_title" value="AI/ML Technologies">
+                                </div>
+                                <div class="form-group">
+                                    <label for="aiml-tags">AI/ML Technologies (comma separated)</label>
+                                    <input type="text" id="aiml-tags" name="aiml_tags" value="Python, TensorFlow, PyTorch, Scikit-learn">
+                                </div>
+                            </div>
+                            
+                            <div class="skill-category-item">
+                                <div class="form-group">
+                                    <label for="dev-title">Development Category Title</label>
+                                    <input type="text" id="dev-title" name="dev_title" value="Development">
+                                </div>
+                                <div class="form-group">
+                                    <label for="dev-tags">Development Technologies (comma separated)</label>
+                                    <input type="text" id="dev-tags" name="dev_tags" value="JavaScript, React, Node.js, Flask">
+                                </div>
+                            </div>
+                            
+                            <div class="skill-category-item">
+                                <div class="form-group">
+                                    <label for="cloud-title">Cloud & DevOps Category Title</label>
+                                    <input type="text" id="cloud-title" name="cloud_title" value="Cloud & DevOps">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cloud-tags">Cloud & DevOps Technologies (comma separated)</label>
+                                    <input type="text" id="cloud-tags" name="cloud_tags" value="AWS, Docker, Kubernetes, Git">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>Resume & Links</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="resume-link">Resume Download Link</label>
+                                <input type="url" id="resume-link" name="resume_link" placeholder="https://your-resume-link.com">
+                                <small>Link for the "Download Resume" button</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="resume-text">Resume Button Text</label>
+                                <input type="text" id="resume-text" name="resume_text" value="Download Resume">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="resetForm('about-form')">Reset</button>
+                        <button type="submit" class="btn btn-primary">Save About Changes</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills-section" class="admin-section">
+            <div class="section-header">
+                <h1>Technical Skills</h1>
+                <p>Manage your technical skills and proficiency levels</p>
+                <button class="btn btn-primary" onclick="openSkillModal()">
+                    <i class="fas fa-plus"></i>
+                    Add New Skill
+                </button>
+            </div>
+            
+            <div class="admin-card">
+                <div class="table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Skill Name</th>
+                                <th>Category</th>
+                                <th>Proficiency</th>
+                                <th>Icon</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="skills-table-body">
+                            <!-- Skills will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects-section" class="admin-section">
+            <div class="section-header">
+                <h1>Projects Management</h1>
+                <p>Add, edit, and manage your portfolio projects</p>
+                <button class="btn btn-primary" onclick="openProjectModal()">
+                    <i class="fas fa-plus"></i>
+                    Add New Project
+                </button>
+            </div>
+            
+            <div class="admin-card">
+                <div class="projects-grid-admin">
+                    <div id="projects-container">
+                        <!-- Projects will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience-section" class="admin-section">
+            <div class="section-header">
+                <h1>Experience & Education</h1>
+                <p>Manage your professional experience and educational background</p>
+                <button class="btn btn-primary" onclick="openExperienceModal()">
+                    <i class="fas fa-plus"></i>
+                    Add New Experience
+                </button>
+            </div>
+            
+            <div class="admin-card">
+                <div class="timeline-admin">
+                    <div id="experience-container">
+                        <!-- Experience items will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact-section" class="admin-section">
+            <div class="section-header">
+                <h1>Contact Information</h1>
+                <p>Update your contact details and social media links</p>
+            </div>
+            
+            <div class="admin-card">
+                <form id="contact-form" class="admin-form">
+                    <h3>Contact Details</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contact-email">Email</label>
+                            <input type="email" id="contact-email" name="contactEmail" value="suki.ai.developer@gmail.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-phone">Phone</label>
+                            <input type="tel" id="contact-phone" name="contactPhone" value="+91 9080630925" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contact-location">Location</label>
+                        <input type="text" id="contact-location" name="contactLocation" value="Coimbatore, India" required>
+                    </div>
+                    
+                    <h3>Social Media Links</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="github-url">GitHub URL</label>
+                            <input type="url" id="github-url" name="githubUrl" placeholder="https://github.com/username">
+                        </div>
+                        <div class="form-group">
+                            <label for="linkedin-url">LinkedIn URL</label>
+                            <input type="url" id="linkedin-url" name="linkedinUrl" placeholder="https://linkedin.com/in/username">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="twitter-url">Twitter URL</label>
+                            <input type="url" id="twitter-url" name="twitterUrl" placeholder="https://twitter.com/username">
+                        </div>
+                        <div class="form-group">
+                            <label for="resume-url">Resume URL</label>
+                            <input type="url" id="resume-url" name="resumeUrl" placeholder="Link to your resume">
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="resetForm('contact-form')">Reset</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Messages Section -->
+        <section id="messages-section" class="admin-section">
+            <div class="section-header">
+                <h1>Contact Messages</h1>
+                <p>View and manage messages from your portfolio contact form</p>
+            </div>
+            
+            <div class="admin-card">
+                <div class="messages-container">
+                    <div id="messages-list">
+                        <!-- Messages will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Settings Section -->
+        <section id="settings-section" class="admin-section">
+            <div class="section-header">
+                <h1>Settings</h1>
+                <p>Configure your portfolio and admin preferences</p>
+            </div>
+            
+            <div class="admin-card">
+                <form id="settings-form" class="admin-form">
+                    <h3>Portfolio Settings</h3>
+                    <div class="form-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="portfolio-public" checked>
+                            <span class="checkmark"></span>
+                            Make portfolio publicly visible
+                        </label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="contact-form-enabled" checked>
+                            <span class="checkmark"></span>
+                            Enable contact form
+                        </label>
+                    </div>
+                    
+                    <h3>Security Settings</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="current-password">Current Password</label>
+                            <input type="password" id="current-password" name="currentPassword">
+                        </div>
+                        <div class="form-group">
+                            <label for="new-password">New Password</label>
+                            <input type="password" id="new-password" name="newPassword">
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="resetForm('settings-form')">Reset</button>
+                        <button type="submit" class="btn btn-primary">Save Settings</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modals -->
+    <!-- Skill Modal -->
+    <div id="skill-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="skill-modal-title">Add New Skill</h2>
+                <button class="modal-close" onclick="closeModal('skill-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="skill-modal-form" class="modal-form">
+                    <input type="hidden" id="skill-id" name="skillId">
+                    <div class="form-group">
+                        <label for="skill-name">Skill Name</label>
+                        <input type="text" id="skill-name" name="skillName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="skill-category">Category</label>
+                        <select id="skill-category" name="skillCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="AI/ML">AI/ML</option>
+                            <option value="Programming">Programming</option>
+                            <option value="Web Development">Web Development</option>
+                            <option value="Cloud & DevOps">Cloud & DevOps</option>
+                            <option value="Data Science">Data Science</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="skill-proficiency">Proficiency (%)</label>
+                        <input type="range" id="skill-proficiency" name="skillProficiency" min="0" max="100" value="80">
+                        <span id="proficiency-display">80%</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="skill-icon">Icon Class (Font Awesome)</label>
+                        <input type="text" id="skill-icon" name="skillIcon" placeholder="fas fa-brain">
+                    </div>
+                    <div class="form-group">
+                        <label for="skill-description">Description</label>
+                        <textarea id="skill-description" name="skillDescription" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('skill-modal')">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveSkill()">Save Skill</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2 id="project-modal-title">Add New Project</h2>
+                <button class="modal-close" onclick="closeModal('project-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="project-modal-form" class="modal-form">
+                    <input type="hidden" id="project-id" name="projectId">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="project-title">Project Title</label>
+                            <input type="text" id="project-title" name="projectTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="project-category">Category</label>
+                            <select id="project-category" name="projectCategory" required>
+                                <option value="">Select Category</option>
+                                <option value="ai">AI/ML</option>
+                                <option value="web">Web Development</option>
+                                <option value="mobile">Mobile</option>
+                                <option value="data">Data Science</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-description">Description</label>
+                        <textarea id="project-description" name="projectDescription" rows="3" required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="project-image">Project Image URL</label>
+                            <input type="url" id="project-image" name="projectImage">
+                        </div>
+                        <div class="form-group">
+                            <label for="project-demo">Demo URL</label>
+                            <input type="url" id="project-demo" name="projectDemo">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-github">GitHub URL</label>
+                        <input type="url" id="project-github" name="projectGithub">
+                    </div>
+                    <div class="form-group">
+                        <label for="project-technologies">Technologies (comma-separated)</label>
+                        <input type="text" id="project-technologies" name="projectTechnologies" placeholder="React, Node.js, MongoDB">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('project-modal')">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveProject()">Save Project</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Experience Modal -->
+    <div id="experience-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="experience-modal-title">Add New Experience</h2>
+                <button class="modal-close" onclick="closeModal('experience-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="experience-modal-form" class="modal-form">
+                    <input type="hidden" id="experience-id" name="experienceId">
+                    <div class="form-group">
+                        <label for="experience-title">Job Title / Degree</label>
+                        <input type="text" id="experience-title" name="experienceTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="experience-company">Company / Institution</label>
+                        <input type="text" id="experience-company" name="experienceCompany" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="experience-start">Start Date</label>
+                            <input type="month" id="experience-start" name="experienceStart" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="experience-end">End Date</label>
+                            <input type="month" id="experience-end" name="experienceEnd">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="experience-current">
+                                <span class="checkmark"></span>
+                                Currently working here
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="experience-description">Description</label>
+                        <textarea id="experience-description" name="experienceDescription" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="experience-technologies">Technologies (comma-separated)</label>
+                        <input type="text" id="experience-technologies" name="experienceTechnologies" placeholder="Python, TensorFlow, AWS">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('experience-modal')">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveExperience()">Save Experience</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="admin-notification" class="notification hidden">
+        <div class="notification-content">
+            <i id="notification-icon" class="fas fa-check-circle"></i>
+            <span id="notification-text"></span>
+            <button class="notification-close" onclick="hideNotification()">&times;</button>
+        </div>
+    </div>
+
+    <script src="admin-dashboard.js"></script>
+</body>
+</html>

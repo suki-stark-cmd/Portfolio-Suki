@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Suki S Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="projects.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">Suki.S</a>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#skills" class="nav-link">Skills</a>
+                <a href="projects.html" class="nav-link active">Projects</a>
+                <a href="index.html#experience" class="nav-link">Experience</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Projects Hero -->
+    <section class="projects-hero">
+        <div class="container">
+            <div class="projects-hero-content">
+                <h1 class="projects-hero-title">My Projects</h1>
+                <p class="projects-hero-subtitle">
+                    A collection of AI and web development projects showcasing my skills and expertise
+                </p>
+                <div class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span>/</span>
+                    <span>Projects</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Filter -->
+    <section class="projects-filter-section">
+        <div class="container">
+            <div class="projects-filter">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="ai">AI/Machine Learning</button>
+                <button class="filter-btn" data-filter="web">Web Development</button>
+                <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
+                <button class="filter-btn" data-filter="data">Data Science</button>
+            </div>
+            <div class="sort-options">
+                <select id="sort-projects">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="name">By Name</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Projects Grid -->
+    <section class="detailed-projects">
+        <div class="container">
+            <div class="projects-grid">
+                <!-- AI Chatbot Project -->
+                <div class="project-card-detailed" data-category="ai" data-date="2024-12">
+                    <div class="project-header">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=500&fit=crop" alt="AI Chatbot">
+                            <div class="project-overlay">
+                                <div class="project-actions">
+                                    <a href="#" class="action-btn" title="Live Demo">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <a href="#" class="action-btn" title="GitHub">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                    <button class="action-btn" onclick="openProjectModal('chatbot')" title="Details">
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-status">
+                            <span class="status-badge completed">Completed</span>
+                            <span class="project-date">December 2024</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-content">
+                        <h3 class="project-title">AI-Powered Customer Support Chatbot</h3>
+                        <p class="project-description">
+                            Intelligent conversational AI system built with natural language processing capabilities. 
+                            Features sentiment analysis, intent recognition, and multi-language support for enhanced customer experience.
+                        </p>
+                        
+                        <div class="project-features">
+                            <h4>Key Features:</h4>
+                            <ul>
+                                <li>Natural Language Understanding (NLU)</li>
+                                <li>Sentiment Analysis & Emotion Detection</li>
+                                <li>Multi-language Support (8 languages)</li>
+                                <li>Integration with CRM systems</li>
+                                <li>Real-time Analytics Dashboard</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="project-tech-stack">
+                            <h4>Technologies Used:</h4>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">TensorFlow</span>
+                                <span class="tech-tag">NLTK</span>
+                                <span class="tech-tag">Flask</span>
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">MongoDB</span>
+                                <span class="tech-tag">Docker</span>
+                                <span class="tech-tag">AWS</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-metrics">
+                            <div class="metric">
+                                <span class="metric-value">95%</span>
+                                <span class="metric-label">Accuracy</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">50%</span>
+                                <span class="metric-label">Response Time Improvement</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">10k+</span>
+                                <span class="metric-label">Daily Conversations</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Computer Vision System -->
+                <div class="project-card-detailed" data-category="ai" data-date="2024-11">
+                    <div class="project-header">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=500&fit=crop" alt="Computer Vision">
+                            <div class="project-overlay">
+                                <div class="project-actions">
+                                    <a href="#" class="action-btn" title="Live Demo">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <a href="#" class="action-btn" title="GitHub">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                    <button class="action-btn" onclick="openProjectModal('vision')" title="Details">
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-status">
+                            <span class="status-badge completed">Completed</span>
+                            <span class="project-date">November 2024</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-content">
+                        <h3 class="project-title">Real-time Object Detection System</h3>
+                        <p class="project-description">
+                            Advanced computer vision system for real-time object detection and tracking using state-of-the-art 
+                            deep learning models. Deployed for security and surveillance applications.
+                        </p>
+                        
+                        <div class="project-features">
+                            <h4>Key Features:</h4>
+                            <ul>
+                                <li>Real-time Object Detection & Tracking</li>
+                                <li>Custom Model Training Pipeline</li>
+                                <li>Multi-camera Support</li>
+                                <li>Alert System Integration</li>
+                                <li>Web-based Dashboard</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="project-tech-stack">
+                            <h4>Technologies Used:</h4>
+                            <div class="tech-tags">
+                                <span class="tech-tag">PyTorch</span>
+                                <span class="tech-tag">OpenCV</span>
+                                <span class="tech-tag">YOLO v8</span>
+                                <span class="tech-tag">FastAPI</span>
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Redis</span>
+                                <span class="tech-tag">NVIDIA CUDA</span>
+                                <span class="tech-tag">Kubernetes</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-metrics">
+                            <div class="metric">
+                                <span class="metric-value">98%</span>
+                                <span class="metric-label">Detection Accuracy</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">30 FPS</span>
+                                <span class="metric-label">Processing Speed</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">24/7</span>
+                                <span class="metric-label">Uptime</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ML Analytics Dashboard -->
+                <div class="project-card-detailed" data-category="web" data-date="2024-10">
+                    <div class="project-header">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop" alt="Analytics Dashboard">
+                            <div class="project-overlay">
+                                <div class="project-actions">
+                                    <a href="#" class="action-btn" title="Live Demo">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <a href="#" class="action-btn" title="GitHub">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                    <button class="action-btn" onclick="openProjectModal('dashboard')" title="Details">
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-status">
+                            <span class="status-badge completed">Completed</span>
+                            <span class="project-date">October 2024</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-content">
+                        <h3 class="project-title">Machine Learning Analytics Dashboard</h3>
+                        <p class="project-description">
+                            Interactive web dashboard for visualizing machine learning model performance, data insights, 
+                            and business metrics with real-time updates and collaborative features.
+                        </p>
+                        
+                        <div class="project-features">
+                            <h4>Key Features:</h4>
+                            <ul>
+                                <li>Interactive Data Visualizations</li>
+                                <li>Real-time Model Monitoring</li>
+                                <li>Custom Report Generation</li>
+                                <li>Team Collaboration Tools</li>
+                                <li>API Integration Hub</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="project-tech-stack">
+                            <h4>Technologies Used:</h4>
+                            <div class="tech-tags">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">D3.js</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">Express</span>
+                                <span class="tech-tag">MongoDB</span>
+                                <span class="tech-tag">Socket.io</span>
+                                <span class="tech-tag">Chart.js</span>
+                                <span class="tech-tag">AWS</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-metrics">
+                            <div class="metric">
+                                <span class="metric-value">40%</span>
+                                <span class="metric-label">Faster Insights</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">500+</span>
+                                <span class="metric-label">Daily Users</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">15</span>
+                                <span class="metric-label">Data Sources</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Smart Health Monitor App -->
+                <div class="project-card-detailed" data-category="mobile" data-date="2024-09">
+                    <div class="project-header">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=500&fit=crop" alt="Health Monitor">
+                            <div class="project-overlay">
+                                <div class="project-actions">
+                                    <a href="#" class="action-btn" title="App Store">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </a>
+                                    <a href="#" class="action-btn" title="GitHub">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                    <button class="action-btn" onclick="openProjectModal('health')" title="Details">
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-status">
+                            <span class="status-badge completed">Completed</span>
+                            <span class="project-date">September 2024</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-content">
+                        <h3 class="project-title">AI-Powered Health Monitoring App</h3>
+                        <p class="project-description">
+                            Mobile application using artificial intelligence for personalized health monitoring, 
+                            wellness recommendations, and early disease detection through advanced analytics.
+                        </p>
+                        
+                        <div class="project-features">
+                            <h4>Key Features:</h4>
+                            <ul>
+                                <li>AI-Powered Health Analysis</li>
+                                <li>Personalized Recommendations</li>
+                                <li>Symptom Checker</li>
+                                <li>Doctor Consultation Booking</li>
+                                <li>Health Data Integration</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="project-tech-stack">
+                            <h4>Technologies Used:</h4>
+                            <div class="tech-tags">
+                                <span class="tech-tag">React Native</span>
+                                <span class="tech-tag">TensorFlow Lite</span>
+                                <span class="tech-tag">Firebase</span>
+                                <span class="tech-tag">ML Kit</span>
+                                <span class="tech-tag">HealthKit</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">MongoDB</span>
+                                <span class="tech-tag">AWS</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-metrics">
+                            <div class="metric">
+                                <span class="metric-value">10k+</span>
+                                <span class="metric-label">Downloads</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">4.8★</span>
+                                <span class="metric-label">App Rating</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">85%</span>
+                                <span class="metric-label">User Retention</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Predictive Analytics Engine -->
+                <div class="project-card-detailed" data-category="data" data-date="2024-08">
+                    <div class="project-header">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=800&h=500&fit=crop" alt="Predictive Analytics">
+                            <div class="project-overlay">
+                                <div class="project-actions">
+                                    <a href="#" class="action-btn" title="Live Demo">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <a href="#" class="action-btn" title="GitHub">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                    <button class="action-btn" onclick="openProjectModal('analytics')" title="Details">
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-status">
+                            <span class="status-badge completed">Completed</span>
+                            <span class="project-date">August 2024</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-content">
+                        <h3 class="project-title">Business Intelligence & Predictive Analytics</h3>
+                        <p class="project-description">
+                            Advanced analytics engine for business forecasting and trend analysis using machine learning algorithms 
+                            to predict market trends, customer behavior, and revenue optimization.
+                        </p>
+                        
+                        <div class="project-features">
+                            <h4>Key Features:</h4>
+                            <ul>
+                                <li>Time Series Forecasting</li>
+                                <li>Customer Segmentation</li>
+                                <li>Churn Prediction</li>
+                                <li>Automated Report Generation</li>
+                                <li>API for Real-time Predictions</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="project-tech-stack">
+                            <h4>Technologies Used:</h4>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Scikit-learn</span>
+                                <span class="tech-tag">Pandas</span>
+                                <span class="tech-tag">NumPy</span>
+                                <span class="tech-tag">Apache Airflow</span>
+                                <span class="tech-tag">PostgreSQL</span>
+                                <span class="tech-tag">Docker</span>
+                                <span class="tech-tag">AWS</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-metrics">
+                            <div class="metric">
+                                <span class="metric-value">92%</span>
+                                <span class="metric-label">Prediction Accuracy</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">30%</span>
+                                <span class="metric-label">Revenue Increase</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">1TB+</span>
+                                <span class="metric-label">Data Processed</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- E-commerce Platform -->
+                <div class="project-card-detailed" data-category="web" data-date="2024-07">
+                    <div class="project-header">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop" alt="E-commerce Platform">
+                            <div class="project-overlay">
+                                <div class="project-actions">
+                                    <a href="#" class="action-btn" title="Live Demo">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <a href="#" class="action-btn" title="GitHub">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                    <button class="action-btn" onclick="openProjectModal('ecommerce')" title="Details">
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-status">
+                            <span class="status-badge completed">Completed</span>
+                            <span class="project-date">July 2024</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-content">
+                        <h3 class="project-title">AI-Enhanced E-commerce Platform</h3>
+                        <p class="project-description">
+                            Full-stack e-commerce solution with AI-powered product recommendations, intelligent search, 
+                            and automated inventory management for enhanced user experience and business efficiency.
+                        </p>
+                        
+                        <div class="project-features">
+                            <h4>Key Features:</h4>
+                            <ul>
+                                <li>AI Product Recommendations</li>
+                                <li>Intelligent Search & Filters</li>
+                                <li>Real-time Inventory Management</li>
+                                <li>Multi-payment Gateway Integration</li>
+                                <li>Advanced Analytics Dashboard</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="project-tech-stack">
+                            <h4>Technologies Used:</h4>
+                            <div class="tech-tags">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Next.js</span>
+                                <span class="tech-tag">Express</span>
+                                <span class="tech-tag">PostgreSQL</span>
+                                <span class="tech-tag">Redis</span>
+                                <span class="tech-tag">Stripe</span>
+                                <span class="tech-tag">ElasticSearch</span>
+                                <span class="tech-tag">AWS</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-metrics">
+                            <div class="metric">
+                                <span class="metric-value">45%</span>
+                                <span class="metric-label">Conversion Rate Increase</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">2M+</span>
+                                <span class="metric-label">Products Catalog</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">99.9%</span>
+                                <span class="metric-label">Uptime</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load More Button -->
+            <div class="load-more-section">
+                <button class="btn btn-secondary" id="load-more-btn">Load More Projects</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Project Title</h2>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="modal-content">
+                    <!-- Dynamic content will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>&copy; 2025 Suki S. All rights reserved.</p>
+                </div>
+                <div class="footer-social">
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="projects.js"></script>
+</body>
+</html>
