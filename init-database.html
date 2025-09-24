@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Firebase Database Initializer</title>
+    <title>Supabase Database Initializer</title>
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -127,18 +127,18 @@
 </head>
 <body>
     <div class="container">
-        <h1>🔥 Firebase Database Initializer</h1>
+        <h1>� Supabase Database Initializer</h1>
         
         <div class="config-section">
             <h4>⚙️ Configuration Required</h4>
             <p>Before initializing the database, you need to:</p>
             <ol>
-                <li>Create a Firebase project at <a href="https://console.firebase.google.com" target="_blank" style="color: #60a5fa;">console.firebase.google.com</a></li>
-                <li>Enable Firestore Database (in production mode)</li>
-                <li>Enable Authentication with Email/Password</li>
-                <li>Copy your Firebase config from Project Settings → General → Web apps</li>
-                <li>Update the config in <code>firebase-config.js</code></li>
-                <li>Create an admin user in Authentication section</li>
+                <li>Create a Supabase project at <a href="https://supabase.com/dashboard" target="_blank" style="color: #60a5fa;">supabase.com/dashboard</a></li>
+                <li>Copy your project URL and anon key from Project Settings → API</li>
+                <li>Update the config in <code>supabase-config.js</code></li>
+                <li>Create database tables using the SQL provided below</li>
+                <li>Enable Row Level Security (RLS) on tables</li>
+                <li>Create an admin user in Authentication → Users</li>
             </ol>
         </div>
 
@@ -172,7 +172,7 @@
     </div>
 
     <script type="module">
-        import { firebaseService } from './firebase-config.js';
+        import { supabaseService } from './supabase-config.js';
 
         let statusDiv, statusContent, initBtn;
 
@@ -181,22 +181,22 @@
             statusContent = document.getElementById('statusContent');
             initBtn = document.getElementById('initBtn');
 
-            // Check Firebase connection
-            checkFirebaseConnection();
+            // Check Supabase connection
+            checkSupabaseConnection();
         });
 
-        async function checkFirebaseConnection() {
+        async function checkSupabaseConnection() {
             try {
-                // Try to access Firestore
-                const testResult = await firebaseService.getCollection('test');
-                if (testResult.success !== undefined) {
-                    logStatus('✅ Firebase connection successful', 'success');
+                // Try to access Supabase
+                const testResult = await supabaseService.testConnection();
+                if (testResult.success) {
+                    logStatus('✅ Supabase connection successful', 'success');
                 } else {
-                    logStatus('⚠️ Firebase may not be properly configured', 'warning');
+                    logStatus('⚠️ Supabase may not be properly configured', 'warning');
                 }
             } catch (error) {
-                logStatus('❌ Firebase connection failed: ' + error.message, 'error');
-                logStatus('Please check your Firebase configuration in firebase-config.js', 'warning');
+                logStatus('❌ Supabase connection failed: ' + error.message, 'error');
+                logStatus('Please check your Supabase configuration in supabase-config.js', 'warning');
             }
         }
 
@@ -207,7 +207,7 @@
             statusContent.innerHTML = '';
 
             try {
-                logStatus('🔥 Starting Firebase database initialization...', 'info');
+                logStatus('� Starting Supabase database initialization...', 'info');
 
                 // Initialize Personal Information
                 logStatus('📝 Initializing personal information...', 'info');
@@ -230,7 +230,7 @@
                 await initializeExperience();
 
                 logStatus('✅ Database initialization completed successfully!', 'success');
-                logStatus('🎉 Your portfolio is now ready with Firebase backend!', 'success');
+                logStatus('🎉 Your portfolio is now ready with Supabase backend!', 'success');
 
             } catch (error) {
                 logStatus('❌ Error during initialization: ' + error.message, 'error');
@@ -263,7 +263,7 @@
                 twitter: "https://twitter.com/suki_stark"
             };
 
-            const result = await firebaseService.addDocument('personalInfo', personalInfo, 'main');
+            const result = await supabaseService.updatePersonalInfo(personalInfo);
             if (result.success) {
                 logStatus('✅ Personal information initialized', 'success');
             } else {
@@ -304,7 +304,7 @@
                 }
             };
 
-            const result = await firebaseService.addDocument('aboutInfo', aboutInfo, 'main');
+            const result = await supabaseService.updateAboutInfo(aboutInfo);
             if (result.success) {
                 logStatus('✅ About information initialized', 'success');
             } else {
@@ -347,7 +347,7 @@
             ];
 
             for (const project of projects) {
-                const result = await firebaseService.addDocument('projects', project);
+                const result = await supabaseService.addProject(project);
                 if (result.success) {
                     logStatus(`✅ Project "${project.title}" added`, 'success');
                 } else {
@@ -389,7 +389,7 @@
             ];
 
             for (const skill of skills) {
-                const result = await firebaseService.addDocument('skills', skill);
+                const result = await supabaseService.addSkill(skill);
                 if (result.success) {
                     logStatus(`✅ Skill "${skill.name}" added`, 'success');
                 } else {
@@ -421,7 +421,7 @@
             ];
 
             for (const experience of experiences) {
-                const result = await firebaseService.addDocument('experience', experience);
+                const result = await supabaseService.addExperience(experience);
                 if (result.success) {
                     logStatus(`✅ Experience "${experience.position}" added`, 'success');
                 } else {

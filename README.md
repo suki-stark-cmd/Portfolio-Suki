@@ -2,7 +2,7 @@
 
 # 🚀 AI Developer Portfolio
 
-A modern, responsive portfolio website with Firebase backend integration and admin dashboard for dynamic content management.
+A modern, responsive portfolio website with Supabase backend integration and admin dashboard for dynamic content management.
 
 ## ✨ Features
 
@@ -11,10 +11,10 @@ A modern, responsive portfolio website with Firebase backend integration and adm
 - **Responsive Layout**: Optimized for all devices (desktop, tablet, mobile)
 - **Interactive Animations**: Smooth scrolling, hover effects, and entrance animations
 - **Dynamic Content**: All content managed through admin dashboard
-- **Real-time Updates**: Changes reflect instantly using Firebase
+- **Real-time Updates**: Changes reflect instantly using Supabase
 
 ### Admin Dashboard
-- **Secure Authentication**: Firebase Authentication for admin access
+- **Secure Authentication**: Supabase Authentication for admin access
 - **Content Management**: Full CRUD operations for all portfolio sections
 - **Real-time Sync**: Changes appear instantly on the portfolio
 - **Data Export**: Export all portfolio data as JSON
@@ -30,9 +30,9 @@ A modern, responsive portfolio website with Firebase backend integration and adm
 - **Google Fonts**: Inter font family for clean typography
 
 ### Backend
-- **Firebase Firestore**: NoSQL database for content storage
-- **Firebase Authentication**: Secure admin access
-- **Firebase Hosting**: Fast, secure web hosting
+- **Supabase**: PostgreSQL database with real-time subscriptions
+- **Supabase Authentication**: Secure admin access
+- **Row Level Security**: Fine-grained access control
 - **Real-time Database**: Instant synchronization
 
 ## 📁 Project Structure
@@ -41,14 +41,15 @@ A modern, responsive portfolio website with Firebase backend integration and adm
 Protfolio/
 ├── index.html                 # Main portfolio page
 ├── styles.css                # Portfolio styling
-├── script.js                 # Portfolio functionality
-├── firebase-config.js        # Firebase configuration
+├── script-supabase.js        # Supabase-powered portfolio functionality
+├── supabase-config.js        # Supabase configuration
+├── init-database.html        # Database initialization interface
 ├── admin/
 │   ├── login.html            # Admin login page
 │   ├── dashboard.html        # Admin dashboard
 │   ├── admin-styles.css      # Admin styling
-│   ├── admin-login-firebase.js     # Firebase login logic
-│   └── admin-dashboard-firebase.js # Firebase dashboard logic
+│   ├── admin-login-supabase.js     # Supabase login logic
+│   └── admin-dashboard-supabase.js # Supabase dashboard logic
 └── assets/
     └── images/               # Portfolio images
 ```

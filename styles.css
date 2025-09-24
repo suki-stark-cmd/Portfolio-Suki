@@ -859,8 +859,8 @@ section {
     gap: 1rem;
 }
 
-/* Firebase Connection Status */
-.firebase-status {
+/* Supabase Connection Status */
+.supabase-status {
     position: fixed;
     top: 20px;
     right: 20px;
@@ -882,18 +882,18 @@ section {
     opacity: 0;
 }
 
-.firebase-status:not(.hidden) {
+.supabase-status:not(.hidden) {
     transform: translateX(0);
     opacity: 1;
 }
 
-.firebase-status.error {
+.supabase-status.error {
     background: rgba(239, 68, 68, 0.95);
     border-color: rgba(239, 68, 68, 0.3);
     box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
 
-.firebase-status i {
+.supabase-status i {
     font-size: 1rem;
 }
 
